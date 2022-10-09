@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
-class CityWidget extends StatelessWidget {
-  final String cityName;
-  CityWidget({required this.cityName});
+class ShaharWidget extends StatelessWidget {
+  final String shaharNomi;
+
+  ShaharWidget({required this.shaharNomi});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: EdgeInsets.all(3),
+        padding: EdgeInsets.all(11),
         child: FittedBox(
-            child: Text(cityName == '' ? ' ' : cityName,
+            child: Text(shaharNomi == '' ? ' ' : shaharNomi,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 22,
                   color: Colors.white,
-                  // fontFamily: 'TitilliumWeb',
                 ))),
       ),
     );

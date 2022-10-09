@@ -6,10 +6,7 @@ abstract class ObHavoEvent extends Equatable {
   List<Object> get props => [];
 }
 
-// class GetWeatherByLocation extends WeatherEvent {
-//
-// }
-
+//event 1
 class GetObHavoShaharNomiEvent extends ObHavoEvent {
  final  String shaharNomi;
   GetObHavoShaharNomiEvent(this.shaharNomi);

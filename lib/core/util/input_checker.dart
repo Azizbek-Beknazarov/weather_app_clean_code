@@ -3,7 +3,7 @@ import 'package:ob_havo_app/core/error/failure.dart';
 
 class InputChecker {
   Either<Xato,String> checkOfStringInput(String value) {
-    value = value.toLowerCase();
+    value = value.toLowerCase().trim();
 
     List<String> values = value.split(" ");
     RegExp expLower = RegExp(r'^[a-z]+$');
