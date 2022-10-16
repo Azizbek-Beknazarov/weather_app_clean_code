@@ -40,10 +40,9 @@ dependencies:
   shared_preferences: ^2.0.15
   http:
   flutter_bloc:
-  bloc_test:
   geolocator:
   get_it:
-  flutter_spinkit:
+  flutter_glow: ^0.2.0
 
 dev_dependencies:
   flutter_test:

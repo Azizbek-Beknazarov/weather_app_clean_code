@@ -17,6 +17,6 @@ class CacheXato extends Xato {}
 
 class InvalidInputXato extends Xato {}
 
-// class LocationDisabledFailure extends Xato {}
-//
-// class LocationPermessionFailure extends Xato {}
+class LocationDisabledXato extends Xato {}
+
+class LocationPermessionXato extends Xato {}

@@ -31,4 +31,23 @@ class ObHavoRepositoryImple implements ObHavoRepository {
       return Left(CacheXato());
     }
   }
+
+  @override
+  Future<Either<Xato, ObHavoEntity>> obhavoOlishLocationRepo()async {
+
+    if (await info.isConnection) {
+      try {
+        final remoteData = await remoteDataSource.getObhavoLocationDatasourse();
+        return Right(remoteData);
+      } on ServerException {
+        return Left(ServerXato(xabar: 'Ulanish yo\'q'));
+      } on LocationDisabledException {
+        return Left(LocationDisabledXato());
+      } on LocationPermessionException {
+        return Left(LocationPermessionXato());
+      }
+    } else {
+      return Left(CacheXato());
+    }
+  }
 }

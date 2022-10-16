@@ -1,9 +1,11 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:ob_havo_app/features/data/datasource/obhavo_remote_datasource.dart';
 import 'package:ob_havo_app/features/data/repository/obhavo_repo_impl.dart';
 import 'package:ob_havo_app/features/domain/repository/obhavo_repo.dart';
+import 'package:ob_havo_app/features/domain/usecase/get_obhavo_location.dart';
 import 'package:ob_havo_app/features/domain/usecase/get_obhavo_shaharnomi.dart';
 import 'package:ob_havo_app/features/presentation/bloc/obhavo_bloc.dart';
 
@@ -16,16 +18,16 @@ Future<void> init() async{
   //! Features - weather
   //bloc
   sl.registerFactory(
-          () => ObHavoBloc(inputChecker: sl(), getObHavoDataShaharNomi: sl()));
+          () => ObHavoBloc(inputChecker: sl(), getObHavoDataShaharNomi: sl(), getObHavoDataLocation: sl()));
   //Use Cases
   sl.registerLazySingleton(() => GetObHavoDataShaharNomi(sl()));
-  // sl.registerLazySingleton(() => GetWeatherDataBylocation(sl()));
+   sl.registerLazySingleton(() => GetObHavoDataLocation(sl()));
   // Repository
   sl.registerLazySingleton<ObHavoRepository>(() => ObHavoRepositoryImple(
       remoteDataSource: sl(), info: sl(), ));
   // Data sources
   sl.registerLazySingleton<ObHavoRemoteDataSource>(() =>
-      ObHavoRemoteDataSourceImple(client: sl(), ));
+      ObHavoRemoteDataSourceImple(client: sl(), geolocator: sl(), ));
 
   //! core
   sl.registerLazySingleton(() => InputChecker());
@@ -33,7 +35,7 @@ Future<void> init() async{
   //! External
 
   //geoLocator
-  // sl.registerLazySingleton(()=> Geolocator());
+  sl.registerLazySingleton(()=> Geolocator());
   // Client
   sl.registerLazySingleton(()=> http.Client());
   // ConnectionChecker
