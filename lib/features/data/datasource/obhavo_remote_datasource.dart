@@ -55,18 +55,18 @@ class ObHavoRemoteDataSourceImple implements ObHavoRemoteDataSource {
         'lon=$lon' +
         '&appid=${con.Constants.apiKey}' +
         con.Constants.units;
-print(link);
+    print(link);
     //
     final response = await client.get(
         Uri.parse(
           link,
         ),
         headers: {'Content-Type': 'application/json'});
-    if(response.statusCode==200){
+    if (response.statusCode == 200) {
       print(response.body);
       return ObHavoModel.fromJson(jsonDecode(response.body));
-    }else{
-     throw ServerException();
+    } else {
+      throw ServerException();
     }
   }
 }
