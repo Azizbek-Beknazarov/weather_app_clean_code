@@ -2,27 +2,44 @@ import 'package:equatable/equatable.dart';
 
 class ObHavoEntity extends Equatable {
   final Coord coord;
-  final String mainD;
+  final String description;
   final String icon;
   final Main main;
   final double windSpeed;
   final int visibility;
   final String name;
   final DateTime date;
+  final int cloudiness;
+  final Sys sys;
+  final double timezone;
 
   ObHavoEntity(
       {required this.coord,
       required this.main,
       required this.windSpeed,
-      required this.mainD,
+      required this.description,
       required this.icon,
       required this.visibility,
       required this.name,
-      required this.date});
+      required this.date,
+      required this.cloudiness,
+      required this.sys,
+      required this.timezone});
 
   @override
-  List<Object?> get props =>
-      [coord, main, windSpeed, visibility, mainD, icon, name,date];
+  List<Object?> get props => [
+        coord,
+        main,
+        windSpeed,
+        visibility,
+        description,
+        icon,
+        name,
+        date,
+        cloudiness,
+        sys,
+        timezone
+      ];
 }
 //
 
@@ -61,8 +78,8 @@ class Main {
 
 class Sys {
   final String country;
-  final int sunrise;
-  final int sunset;
+  final DateTime sunrise;
+  final DateTime sunset;
 
   Sys({required this.country, required this.sunrise, required this.sunset});
 }

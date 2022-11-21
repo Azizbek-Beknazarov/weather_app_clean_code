@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ob_havo_app/core/error/failure.dart';
+import 'package:ob_havo_app/core/util/constants.dart';
 
 class InputChecker {
   Either<Xato,String> checkOfStringInput(String value) {
@@ -10,7 +11,7 @@ class InputChecker {
 
     for(String val in values){
       if(!expLower.hasMatch(val) ){
-        return Left(InvalidInputXato());
+        return Left(InvalidInputXato(xabar: Constants.INVALID_INPUT_XATO_XABAR));
       }
     }
     return Right(value.trim());

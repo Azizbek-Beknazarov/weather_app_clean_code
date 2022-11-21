@@ -12,4 +12,11 @@ class MainModel extends Main {
         pressure: json['pressure'].toDouble(),
         humidity: json['humidity'].toDouble());
   }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['temp'] = this.temp;
+  //   data['pressure'] = this.pressure;
+  //   data['humidity'] = this.humidity;
+  //   return data;
+  // }
 }

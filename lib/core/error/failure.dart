@@ -1,21 +1,31 @@
 import 'package:equatable/equatable.dart';
 
 abstract class Xato extends Equatable {
-  final List xususiyat;
-  Xato([this.xususiyat = const <dynamic>[]]);
+
 
   @override
-  List<Object> get props => [xususiyat];
+  List<Object> get props => [];
 }
 
 class ServerXato extends Xato {
   final String xabar;
-  ServerXato({required this.xabar}) : super([xabar]);
+
+  ServerXato({required this.xabar});
 }
 
-class CacheXato extends Xato {}
+// class CacheXato extends Xato {}
+class InternetXato extends Xato{
+ final String xabar;
 
-class InvalidInputXato extends Xato {}
+  InternetXato({required this.xabar});
+
+}
+
+class InvalidInputXato extends Xato {
+  final String xabar;
+
+  InvalidInputXato({required this.xabar});
+}
 
 class LocationDisabledXato extends Xato {}
 

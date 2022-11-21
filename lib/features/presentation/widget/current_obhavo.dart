@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:ob_havo_app/features/presentation/bloc/obhavo_bloc.dart';
 import 'package:ob_havo_app/features/presentation/widget/extra_obhavo.dart';
+import 'package:intl/intl.dart';
 
 class CurrentObHavo extends StatelessWidget {
   CurrentObHavo({Key? key}) : super(key: key);
@@ -11,8 +12,13 @@ class CurrentObHavo extends StatelessWidget {
   String _shaharNomi = '';
   final TextEditingController controllerShahar = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
+    Future<void> refresh() {
+      return Future(() =>
+          BlocProvider.of<ObHavoBloc>(context).add(GetObHavoLocationEvent()));
+    }
     return BlocBuilder<ObHavoBloc, ObHavoState>(builder: (ctx, state) {
       if (state is LoadedObHavo) {
         String iconPath = 'images/sunny.png';
@@ -72,7 +78,7 @@ class CurrentObHavo extends StatelessWidget {
             iconPath = 'images/mist.png';
             break;
           default:
-            iconPath='images/sunny.png';
+            iconPath = 'images/sunny.png';
         }
         return GlowContainer(
           height: MediaQuery.of(context).size.height - 140,
@@ -110,7 +116,7 @@ class CurrentObHavo extends StatelessWidget {
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(60))),
-                                          hintText: 'Shahar kiriting!',
+                                          hintText: 'Shaharni kiriting!',
                                           hintStyle: TextStyle(
                                               fontSize: 20.0,
                                               color: Colors.black),
@@ -130,7 +136,8 @@ class CurrentObHavo extends StatelessWidget {
                                             Navigator.pop(context);
                                             searchShaharNomi(context);
                                           },
-                                          child: Text('Izlash')),
+
+                                          child: Text('Izlash',style: TextStyle(color: Colors.white),),style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue))),
                                     ],
                                   ),
                                 ),
@@ -154,10 +161,21 @@ class CurrentObHavo extends StatelessWidget {
                       )
                     ],
                   ),
-                  IconButton(onPressed: (){
-
-                  }, icon: Icon(Icons.settings,color: Colors.white,))
+                  IconButton(
+                      onPressed: () {
+refresh();
+                      },
+                      icon: Icon(
+                        Icons.update,
+                        color: Colors.white,
+                      ))
                 ],
+              ),
+              Container(
+                child: Text(
+                  state.obhavo.sys.country,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                ),
               ),
               Container(
                 height: 390,
@@ -182,15 +200,18 @@ class CurrentObHavo extends StatelessWidget {
                                   fontSize: 150,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(state.obhavo.mainD,
+                            Text(state.obhavo.description,
                                 style: TextStyle(
                                   fontSize: 25,
                                 )),
-                            Text(state.obhavo.date.toString(),
-
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ))
+                            Text(
+                              '${DateFormat.yMMMd()
+                                  .add_Hm()
+                                  .format(state.obhavo.date)
+                               } ', style: TextStyle(
+                            fontSize: 18,
+                            ),
+                            ),
                           ],
                         )))
                   ],
@@ -209,6 +230,7 @@ class CurrentObHavo extends StatelessWidget {
         );
       }
       return Container(
+        height: 400,
         child: Center(
           child: CircularProgressIndicator(),
         ),

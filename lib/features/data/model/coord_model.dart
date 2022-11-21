@@ -8,10 +8,10 @@ class CoordModel extends Coord{
 
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['lon'] = this.lon;
-    data['lat'] = this.lat;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['lon'] = this.lon;
+  //   data['lat'] = this.lat;
+  //   return data;
+  // }
 }
