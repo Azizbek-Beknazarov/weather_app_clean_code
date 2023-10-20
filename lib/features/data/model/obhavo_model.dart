@@ -1,7 +1,6 @@
 import 'package:ob_havo_app/features/data/model/coord_model.dart';
 import 'package:ob_havo_app/features/data/model/main_model.dart';
 import 'package:ob_havo_app/features/data/model/sys_model.dart';
-
 import 'package:ob_havo_app/features/domain/entity/obhavo_entity.dart';
 
 class ObHavoModel extends ObHavoEntity {
@@ -53,18 +52,18 @@ class ObHavoModel extends ObHavoEntity {
     );
   }
 
-  // Map<String, dynamic> toJson() {
-  //   final Map<String, dynamic> data = new Map<String, dynamic>();
-  //   data['coord'] = this.coord;
-  //   data['main'] = this.main;
-  //   data['wind']['speed'] = this.windSpeed;
-  //   data['weather'][0]['description'] = this.description;
-  //   data['weather'][0]['icon'] = this.icon;
-  //   data['name'] = this.name;
-  //   data['dt'] = this.date;
-  //   data["clouds"]['all'] = this.cloudiness;
-  //   data["sys"] = this.sys;
-  //   data["timezone"] = this.timezone;
-  //   return data;
-  // }
+// Map<String, dynamic> toJson() {
+//   final Map<String, dynamic> data = new Map<String, dynamic>();
+//   data['coord'] = this.coord;
+//   data['main'] = this.main;
+//   data['wind']['speed'] = this.windSpeed;
+//   data['weather'][0]['description'] = this.description;
+//   data['weather'][0]['icon'] = this.icon;
+//   data['name'] = this.name;
+//   data['dt'] = this.date;
+//   data["clouds"]['all'] = this.cloudiness;
+//   data["sys"] = this.sys;
+//   data["timezone"] = this.timezone;
+//   return data;
+// }
 }

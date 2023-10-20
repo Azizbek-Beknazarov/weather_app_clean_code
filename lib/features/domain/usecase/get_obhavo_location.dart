@@ -6,17 +6,18 @@ import 'package:ob_havo_app/features/domain/entity/obhavo_entity.dart';
 
 import '../repository/obhavo_repo.dart';
 
-class GetObHavoDataLocation implements UseCase<ObHavoEntity,NoParams>{
+class GetObHavoDataLocation implements UseCase<ObHavoEntity, NoParams> {
   final ObHavoRepository obHavoRepository;
 
   GetObHavoDataLocation(this.obHavoRepository);
-  @override
-  Future<Either<Xato, ObHavoEntity>> call(params) async{
-return await obHavoRepository.obhavoOlishLocationRepo();
-  }
 
+  @override
+  Future<Either<Xato, ObHavoEntity>> call(params) async {
+    return await obHavoRepository.obhavoOlishLocationRepo();
+  }
 }
-class NoParams extends Equatable{
+
+class NoParams extends Equatable {
   @override
   List<Object?> get props => [];
 }

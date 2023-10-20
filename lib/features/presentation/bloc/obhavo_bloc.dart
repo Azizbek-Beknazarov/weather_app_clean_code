@@ -1,24 +1,19 @@
-
-
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ob_havo_app/core/error/failure.dart';
 import 'package:ob_havo_app/core/usecase/use_case.dart';
+import 'package:ob_havo_app/core/util/constants.dart' as constants;
 import 'package:ob_havo_app/features/domain/usecase/get_obhavo_location.dart';
 
 import '../../../core/util/input_checker.dart';
 import '../../domain/entity/obhavo_entity.dart';
 import '../../domain/usecase/get_obhavo_shaharnomi.dart';
-import 'package:ob_havo_app/core/util/constants.dart' as constants;
-
 
 part 'obhavo_event.dart';
 
 part 'obhavo_state.dart';
-
-
 
 class ObHavoBloc extends Bloc<ObHavoEvent, ObHavoState> {
   final GetObHavoDataShaharNomi getObHavoDataShaharNomi;
@@ -26,7 +21,9 @@ class ObHavoBloc extends Bloc<ObHavoEvent, ObHavoState> {
   final InputChecker inputChecker;
 
   ObHavoBloc(
-      {required this.getObHavoDataShaharNomi,required this.getObHavoDataLocation, required this.inputChecker})
+      {required this.getObHavoDataShaharNomi,
+      required this.getObHavoDataLocation,
+      required this.inputChecker})
       : super(InitialObHavo()) {
     //1-event
     on<GetObHavoShaharNomiEvent>((event, emit) async {
@@ -34,26 +31,28 @@ class ObHavoBloc extends Bloc<ObHavoEvent, ObHavoState> {
       final Either inputEither =
           inputChecker.checkOfStringInput(event.shaharNomi);
       //
-      await inputEither
-          .fold((xato) async => emit(ErrorObHavo(errorXabar:_mapFailureToMessage(xato) )),
-              (shahar) async {
-        //fold ichida fold
+      await inputEither.fold(
+          (xato) async =>
+              emit(ErrorObHavo(errorXabar: _mapFailureToMessage(xato))),
+          (shahar) async {
+
         emit(LoadingObHavo());
         //
         final xatoOrObhavo =
             await getObHavoDataShaharNomi(ShaharParams(shaharNomi: shahar));
         xatoOrObhavo.fold(
-            (l) => emit(ErrorObHavo(errorXabar:_mapFailureToMessage(l))),
+            (l) => emit(ErrorObHavo(errorXabar: _mapFailureToMessage(l))),
             (shahar) => emit(LoadedObHavo(obhavo: shahar)));
       });
     });
 
     // 2-event
-    on<GetObHavoLocationEvent>((event,emit)async{
+    on<GetObHavoLocationEvent>((event, emit) async {
       emit(LoadingObHavo());
-      final xatoOrObhavo =await getObHavoDataLocation(NoParams());
-      xatoOrObhavo.fold((l) => emit(ErrorObHavo(errorXabar: _mapFailureToMessage(l))),
-              (shahar) =>emit(LoadedObHavo(obhavo: shahar)) );
+      final xatoOrObhavo = await getObHavoDataLocation(NoParams());
+      xatoOrObhavo.fold(
+          (l) => emit(ErrorObHavo(errorXabar: _mapFailureToMessage(l))),
+          (shahar) => emit(LoadedObHavo(obhavo: shahar)));
     });
   }
 
@@ -69,5 +68,4 @@ class ObHavoBloc extends Bloc<ObHavoEvent, ObHavoState> {
         return 'Unexpected Error';
     }
   }
-
 }

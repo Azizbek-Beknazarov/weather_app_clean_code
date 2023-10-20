@@ -1,29 +1,25 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ob_havo_app/features/presentation/bloc/obhavo_bloc.dart';
 
 class HourlyObHavo extends StatelessWidget {
+  const HourlyObHavo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ObHavoBloc, ObHavoState>(
       builder: (ctx, state) {
         if (state is LoadedObHavo) {
           return Padding(
-            padding: EdgeInsets.only(left: 30, right: 30, top: 10),
+            padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
             child: Column(
               children: [
                 Container(
-
-                  padding: EdgeInsets.all(9),
+                  padding: const EdgeInsets.all(9),
                   decoration: BoxDecoration(
-                    color: Colors.blue,
-                      border: Border.all(width: 0.9,
-
-                          color: Colors.red
-
-                      ),
+                      color: Colors.blue,
+                      border: Border.all(width: 0.9, color: Colors.red),
                       borderRadius: BorderRadius.circular(35)),
                   child: Text('Bulutlilik: ${state.obhavo.cloudiness} %'),
                 ),
@@ -32,57 +28,60 @@ class HourlyObHavo extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(5),
-                        padding: EdgeInsets.all(9),
+                        margin: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(9),
                         decoration: BoxDecoration(
-                            border: Border.all(width: 1.2,  color: Colors.blue,),
+                            border: Border.all(
+                              width: 1.2,
+                              color: Colors.blue,
+                            ),
                             borderRadius: BorderRadius.circular(35)),
-                        child:
-                            Text('Uzunlik: ${state.obhavo.coord.lon.toString()}'),
+                        child: Text(
+                            'Uzunlik: ${state.obhavo.coord.lon.toString()}'),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 9,
                       ),
                       Container(
-                        padding: EdgeInsets.all(9),
+                        padding: const EdgeInsets.all(9),
                         decoration: BoxDecoration(
-                            border: Border.all(width: 1.2,  color: Colors.blue,),
+                            border: Border.all(
+                              width: 1.2,
+                              color: Colors.blue,
+                            ),
                             borderRadius: BorderRadius.circular(35)),
-                        child:
-                            Text('Kenglik: ${state.obhavo.coord.lat.toString()}'),
+                        child: Text(
+                            'Kenglik: ${state.obhavo.coord.lat.toString()}'),
                       ),
-
-
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 4,
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-
-                      SizedBox(
+                      const SizedBox(
                         width: 9,
                       ),
                       Container(
-                        padding: EdgeInsets.all(9),
+                        padding: const EdgeInsets.all(9),
                         decoration: BoxDecoration(
-                          color: Colors.green,
+                            color: Colors.green,
                             border: Border.all(width: 1.2, color: Colors.red),
                             borderRadius: BorderRadius.circular(35)),
                         child: Text(
                             'Kun chiqishi: ${DateFormat.Hm().format(state.obhavo.sys.sunrise)}'),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 9,
                       ),
                       Container(
-                        padding: EdgeInsets.all(9),
+                        padding: const EdgeInsets.all(9),
                         decoration: BoxDecoration(
-                          color: Colors.redAccent,
+                            color: Colors.redAccent,
                             border: Border.all(width: 1.2, color: Colors.green),
                             borderRadius: BorderRadius.circular(35)),
                         child: Text(
@@ -91,19 +90,24 @@ class HourlyObHavo extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 6,),
+                const SizedBox(
+                  height: 6,
+                ),
                 Container(
-                  padding: EdgeInsets.all(9),
+                  padding: const EdgeInsets.all(9),
                   decoration: BoxDecoration(
                       border: Border.all(width: 0.2, color: Colors.white),
                       borderRadius: BorderRadius.circular(35)),
-                  child: Text('Vaqt mintaqasi: GMT ${((state.obhavo.timezone).round())}',style: TextStyle(color: Colors.yellow),),
+                  child: Text(
+                    'Vaqt mintaqasi: GMT ${((state.obhavo.timezone).round())}',
+                    style: const TextStyle(color: Colors.yellow),
+                  ),
                 )
               ],
             ),
           );
         }
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },

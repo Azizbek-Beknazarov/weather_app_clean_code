@@ -1,6 +1,5 @@
 part of 'obhavo_bloc.dart';
 
-@immutable
 abstract class ObHavoEvent extends Equatable {
   const ObHavoEvent();
 
@@ -12,7 +11,7 @@ abstract class ObHavoEvent extends Equatable {
 class GetObHavoShaharNomiEvent extends ObHavoEvent {
   final String shaharNomi;
 
-  GetObHavoShaharNomiEvent(this.shaharNomi);
+  const GetObHavoShaharNomiEvent(this.shaharNomi);
 
   @override
   List<Object> get props => [shaharNomi];

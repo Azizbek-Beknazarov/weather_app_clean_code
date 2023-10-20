@@ -2,15 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ob_havo_app/features/presentation/bloc/obhavo_bloc.dart';
-import 'package:weather_icons/weather_icons.dart';
 
 class ExtraObHavo extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ObHavoBloc,ObHavoState>(builder: (ctx,state){
-      if(state is LoadedObHavo){
+    return BlocBuilder<ObHavoBloc, ObHavoState>(builder: (ctx, state) {
+      if (state is LoadedObHavo) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -51,7 +48,6 @@ class ExtraObHavo extends StatelessWidget {
                   state.obhavo.main.humidity.round().toString() + " %",
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                 ),
-
                 SizedBox(
                   height: 10,
                 ),
@@ -63,17 +59,15 @@ class ExtraObHavo extends StatelessWidget {
             ),
             Column(
               children: [
-
                 Icon(
-                  Icons.visibility
-                      ,
+                  Icons.visibility,
                   color: Colors.white,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  ((state.obhavo.visibility)/1000).round().toString() + " km",
+                  ((state.obhavo.visibility) / 1000).round().toString() + " km",
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                 ),
                 SizedBox(
@@ -81,14 +75,15 @@ class ExtraObHavo extends StatelessWidget {
                 ),
                 Text(
                   "Ko\'rish\nmasofasi",
-                  style: TextStyle(color: Colors.black54, fontSize: 10,fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold),
                 ),
-
               ],
             ),
             Column(
               children: [
-
                 Image(
                   image: AssetImage('images/icon_airpressure.png'),
                   width: 25,
@@ -108,16 +103,16 @@ class ExtraObHavo extends StatelessWidget {
                   "Bosim",
                   style: TextStyle(color: Colors.black54, fontSize: 16),
                 ),
-
               ],
             ),
           ],
         );
       }
-      return Container(child: Center(child: Text(
-        'error bloc builder'
-      ),),);
+      return Container(
+        child: Center(
+          child: Text('error bloc builder'),
+        ),
+      );
     });
-
   }
 }

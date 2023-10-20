@@ -1,9 +1,7 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-
-
 import 'package:ob_havo_app/features/data/datasource/obhavo_remote_datasource.dart';
 import 'package:ob_havo_app/features/data/repository/obhavo_repo_impl.dart';
 import 'package:ob_havo_app/features/domain/repository/obhavo_repo.dart';
@@ -38,10 +36,6 @@ Future<void> init() async {
             client: sl(),
             geolocator: sl(),
           ));
-
-
-  // sl.registerLazySingleton<ObhavoLocalDatasource>(
-  //     () => ObhavoLocalDatasourceImple(preferences: sl()));
 
   //! core
   sl.registerLazySingleton(() => InputChecker());

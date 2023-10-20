@@ -1,9 +1,10 @@
 import 'dart:convert';
+
 import 'package:geolocator/geolocator.dart';
-import 'package:ob_havo_app/core/error/exception.dart';
-import 'package:ob_havo_app/features/data/model/obhavo_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:ob_havo_app/core/error/exception.dart';
 import 'package:ob_havo_app/core/util/constants.dart' as con;
+import 'package:ob_havo_app/features/data/model/obhavo_model.dart';
 
 abstract class ObHavoRemoteDataSource {
   Future<ObHavoModel> getObhavoShaharNomiDatasourse(String shaharNomi);
@@ -45,7 +46,7 @@ class ObHavoRemoteDataSourceImple implements ObHavoRemoteDataSource {
     LocationPermission permission;
     permission = await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.low);
+        desiredAccuracy: LocationAccuracy.high);
 //
     double lon = position.longitude;
     double lat = position.latitude;

@@ -7,7 +7,7 @@ abstract class UseCase<Type, Params> {
 }
 
 class ShaharParams extends Equatable {
- final String shaharNomi;
+  final String shaharNomi;
 
   ShaharParams({required this.shaharNomi});
 

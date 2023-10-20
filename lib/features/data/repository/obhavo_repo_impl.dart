@@ -1,23 +1,20 @@
 import 'package:dartz/dartz.dart';
 import 'package:ob_havo_app/core/error/exception.dart';
 import 'package:ob_havo_app/core/error/failure.dart';
-
 import 'package:ob_havo_app/core/network/network_info.dart';
 import 'package:ob_havo_app/features/data/datasource/obhavo_remote_datasource.dart';
 import 'package:ob_havo_app/features/data/model/obhavo_model.dart';
-
 import 'package:ob_havo_app/features/domain/entity/obhavo_entity.dart';
 
 import '../../domain/repository/obhavo_repo.dart';
 
 class ObHavoRepositoryImple implements ObHavoRepository {
-  ObHavoRemoteDataSource remoteDataSource;
-  // ObhavoLocalDatasource localDatasource;
-  NetworkInfo info;
+  final ObHavoRemoteDataSource remoteDataSource;
+
+  final NetworkInfo info;
 
   ObHavoRepositoryImple({
     required this.remoteDataSource,
-    // required this.localDatasource,
     required this.info,
   });
 
@@ -39,20 +36,11 @@ class ObHavoRepositoryImple implements ObHavoRepository {
     if (await info.isConnection) {
       try {
         final havo = await chooser();
-         // localDatasource.obhavoToCache(havo);
         return Right(havo);
       } on ServerException {
         return Left(ServerXato(xabar: 'Serverda xato bor'));
       }
-    }
-    else return Left(InternetXato(xabar: 'Internet ulanmagan'));
-    // else {
-    //   try {
-    //     // final havo = await localDatasource.getOxirgiObhavo();
-    //     return Right(havo);
-    //   } on CacheException {
-    //     return Left(CacheXato());
-    //   }
-    // }
+    } else
+      return Left(InternetXato(xabar: 'Internet ulanmagan'));
   }
 }
